@@ -1,5 +1,5 @@
 import sys
-from src import MqttClient
+from src.mqtt_client import mqtt_client
 
 RUN_LOOP = False
 
@@ -21,7 +21,7 @@ def main():
         print('loop - To run the server in loop mode')
 def start_server(loop_mode ):
     print('Starting mqtt server')
-    mqtt_client = MqttClient()
+    
     mqtt_client.connect()
     if loop_mode:
         mqtt_client.loop()

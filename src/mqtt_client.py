@@ -10,6 +10,7 @@ class MqttClient():
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
 
+        self.topic = 'hello'
         # When in production change this to a non public one
         self.host = "broker.emqx.io"
         self.port = 1883
@@ -28,11 +29,12 @@ class MqttClient():
 
         print(f"Connected ? {client.is_connected()}")
 
-        self.subscribe('world')
+        self.subscribe(self.topic)
 
     def on_message(self, client, userdata, msg):
         print(msg.topic+" "+str(msg.payload.decode()))
-        executor(msg.payload.decode())
+        param = executor(msg.payload.decode())
+        self.client.publish(topic, param)
         
 
     def connect(self):
@@ -58,3 +60,4 @@ class MqttClient():
 
 
 
+mqtt_client = MqttClient()

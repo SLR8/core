@@ -1,18 +1,25 @@
-# import obd
-# import logging
-
-# # connection = obd.OBD()
+import obd
+import logging
 
 
-# class OBDDevice():
-#     def __init__(self) -> None:
-#         self.connection = None
-#         self.initialise()
+logger = logging.getLogger(__name__)
 
-#     def initialise(self):
-#         try:
-#             self.connection = obd.OBD()
+class OBDDevice():
+    def __init__(self) -> None:
+        self.connection = None
+        self.initialise()
 
-#         except AttributeError:
-#             logging.log(1, "No obd device has been detected")
+    def initialise(self):
+        try:
+            self.connection = obd.OBD()
 
+        except AttributeError:
+            logger.debug("No obd device has been detected")
+
+    # def simulate_obd(self, command):
+
+
+
+
+if __name__ == '__main__':
+    obd_device = OBDDevice()
